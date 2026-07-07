@@ -1,0 +1,160 @@
+
+========================================
+EMAIL SENT TO: john.doe@example.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello John Doe,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+630575
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello shamarthi sathish,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+330926
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello shamarthi sathish,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+973848
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=kDy7VjYr53nMMfTzP9KXEbu-3lE8iA7ZyCzT6lJl4qk&email=shamarthi.sathish111@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: sathish.official1523@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=kEPe4Zah0qWzZ8S9fLLQ5DwyCoe1Uq6BJgB-lHl2jDA&email=sathish.official1523@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: john.doe@example.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello shamarthi sathish,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+123456
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: podipox968@dysonc.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello shamarthi sathish,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+775670
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=sPx_e786M4qoKfPK_uaxi-tiSfrSCDEGKn06SBejyW0&email=shamarthi.sathish111@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=HL96_FIMJz9cU82pA6MWdB2q6_mzvJuY3u2GyB14svk&email=shamarthi.sathish111@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=3_6iFHEGBfjDuUwRoe_OUv5W17fi63TQXjGE7CLSI2U&email=shamarthi.sathish111@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
