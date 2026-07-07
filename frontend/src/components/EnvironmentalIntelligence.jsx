@@ -18,12 +18,12 @@ export default function EnvironmentalIntelligence({ userId, token, initialLocati
     setError('');
     try {
       const headers = { 'Authorization': `Bearer ${token}` };
-      const res = await fetch(`http://localhost:8000/api/environment/${userId}`, { headers });
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/environment/${userId}`, { headers });
       if (res.ok) {
         const data = await res.json();
         setEnvData(data);
         
-        const histRes = await fetch(`http://localhost:8000/api/environment/history/${userId}`, { headers });
+        const histRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/environment/history/${userId}`, { headers });
         if (histRes.ok) {
           const histData = await histRes.json();
           setHistory(histData);
@@ -203,13 +203,13 @@ export default function EnvironmentalIntelligence({ userId, token, initialLocati
           // Attempt to sync location to profile in the backend
           try {
             const headers = { 'Authorization': `Bearer ${token}` };
-            const getProfile = await fetch(`http://localhost:8000/api/profile/${userId}`, { headers });
+            const getProfile = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/${userId}`, { headers });
             let currentProfile = {};
             if (getProfile.ok) {
               currentProfile = await getProfile.json();
             }
             
-            await fetch('http://localhost:8000/api/profile', {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -258,14 +258,14 @@ export default function EnvironmentalIntelligence({ userId, token, initialLocati
     try {
       // Fetch current profile to merge fields
       const headers = { 'Authorization': `Bearer ${token}` };
-      const getProfile = await fetch(`http://localhost:8000/api/profile/${userId}`, { headers });
+      const getProfile = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/${userId}`, { headers });
       let currentProfile = {};
       if (getProfile.ok) {
         currentProfile = await getProfile.json();
       }
 
       // Update location field
-      await fetch('http://localhost:8000/api/profile', {
+      await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

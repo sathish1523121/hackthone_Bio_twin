@@ -280,12 +280,12 @@ export default function App() {
         setEnvLoading(true);
         try {
           const headers = { 'Authorization': `Bearer ${token}` };
-          const res = await fetch(`http://localhost:8000/api/environment/${user.id}`, { headers });
+          const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/environment/${user.id}`, { headers });
           if (res.ok) {
             const data = await res.json();
             setEnvData(data);
           }
-          const resHist = await fetch(`http://localhost:8000/api/environment/history/${user.id}`, { headers });
+          const resHist = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/environment/history/${user.id}`, { headers });
           if (resHist.ok) {
             const histData = await resHist.json();
             setEnvHistory(histData);
@@ -305,7 +305,7 @@ export default function App() {
     if (activeTab === 'simulations' && user && token) {
       const fetchSimHistory = async () => {
         try {
-          const res = await fetch(`http://localhost:8000/api/reports/simulations/${user.id}`, {
+          const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/simulations/${user.id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (res.ok) {
@@ -332,7 +332,7 @@ export default function App() {
     const question = `What happens if I change my sleep to ${sleep} hours, workouts to ${workouts} days, and diet to ${diet}?`;
     
     try {
-      const res = await fetch('http://localhost:8000/api/reports/simulate', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/simulate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -373,7 +373,7 @@ export default function App() {
       const authHeaders = { 'Authorization': `Bearer ${accessToken}` };
       
       // 1. Fetch Profile
-      const profileRes = await fetch(`http://localhost:8000/api/profile/${uid}`, { headers: authHeaders });
+      const profileRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile/${uid}`, { headers: authHeaders });
       if (profileRes.ok) {
         const profileData = await profileRes.json();
         setProfile(profileData);
@@ -381,7 +381,7 @@ export default function App() {
         
         // 2. Fetch Reports History
         try {
-          const historyRes = await fetch(`http://localhost:8000/api/reports/history/${uid}`, { headers: authHeaders });
+          const historyRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/history/${uid}`, { headers: authHeaders });
           if (historyRes.ok) {
             const historyData = await historyRes.json();
             setReportHistory(historyData);
@@ -437,7 +437,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('http://localhost:8000/api/auth/signup', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -467,7 +467,7 @@ export default function App() {
     setAuthLoading(true);
     setAuthError('');
     try {
-      const res = await fetch('http://localhost:8000/api/auth/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -538,7 +538,7 @@ export default function App() {
 
   const handleStartGeneration = async (reportData) => {
     try {
-      const res = await fetch('http://localhost:8000/api/reports/generate', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/generate`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

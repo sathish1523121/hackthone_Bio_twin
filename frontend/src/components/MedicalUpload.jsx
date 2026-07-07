@@ -72,7 +72,7 @@ export default function MedicalUpload({ userId, token, profile, onUploadSuccess,
     const formData = new FormData();
     formData.append("file", fileToUpload);
 
-    fetch("http://localhost:8000/api/reports/upload", {
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/upload`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`

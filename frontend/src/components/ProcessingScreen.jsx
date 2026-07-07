@@ -87,7 +87,7 @@ export default function ProcessingScreen({ kickoffId, userId, token, onComplete 
 
     const checkStatus = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/reports/status/${kickoffId}?userId=${userId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/reports/status/${kickoffId}?userId=${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

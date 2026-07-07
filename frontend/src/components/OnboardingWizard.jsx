@@ -75,7 +75,7 @@ export default function OnboardingWizard({ userId, token, defaultName = '', onCo
     setError('');
 
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

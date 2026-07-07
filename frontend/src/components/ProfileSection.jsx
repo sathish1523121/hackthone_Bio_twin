@@ -64,7 +64,7 @@ export default function ProfileSection({ userId, token, initialProfile, onSaveSu
     }
 
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

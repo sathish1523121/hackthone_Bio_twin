@@ -31,7 +31,7 @@ export default function VerifyEmail({ email, onVerificationSuccess, onBackToSign
     setResendSuccess('');
 
     try {
-      const res = await fetch('http://localhost:8000/api/auth/verify-otp', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -66,7 +66,7 @@ export default function VerifyEmail({ email, onVerificationSuccess, onBackToSign
     setResendSuccess('');
     
     try {
-      const res = await fetch('http://localhost:8000/api/auth/resend-otp', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/resend-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
