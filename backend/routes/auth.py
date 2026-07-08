@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, BackgroundTasks
 from pydantic import BaseModel, EmailStr, Field
 import uuid
 import re
@@ -40,16 +40,21 @@ class ResetPasswordRequest(BaseModel):
     confirmPassword: str
 
 def validate_password_strength(password: str) -> bool:
-    # Requires at least one letter and one digit
     return bool(re.search(r"[a-zA-Z]", password)) and bool(re.search(r"\d", password))
 
 def validate_phone_format(phone: str) -> bool:
-    # Basic phone format check: allows +, numbers, dashes, spaces, and parenthesis
     return bool(re.match(r"^\+?[\d\s\-\(\)]+$", phone))
 
+def background_send_otp(name: str, email: str, otp_code: str):
+    email_sent = send_otp_email(name, email, otp_code)
+    if not email_sent:
+        print(f"Warning: Failed to send OTP email to {email}")
+
+def background_send_reset(email: str, reset_link: str):
+    send_reset_email(email, reset_link)
+
 @router.post("/signup")
-async def signup_request(req: SignupRequest):
-    # 1. Validation Rules
+async def signup_request(req: SignupRequest, background_tasks: BackgroundTasks):
     if req.password != req.confirmPassword:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -68,7 +73,6 @@ async def signup_request(req: SignupRequest):
             detail="Invalid phone number format."
         )
 
-    # 2. Check if email already exists in active users
     existing = await users_col.find_one({"email": req.email.lower()})
     if existing:
         raise HTTPException(
@@ -76,16 +80,13 @@ async def signup_request(req: SignupRequest):
             detail="An account with this email already exists. Please login."
         )
     
-    # 3. Generate a secure 6-digit OTP
     if req.email.lower() == "john.doe@example.com":
         otp_code = "123456"
     else:
         otp_code = "".join(secrets.choice("0123456789") for _ in range(6))
     
-    # 4. Hash password securely for storage in pending registration
     hashed_pwd, salt = hash_password(req.password)
     
-    # 5. Store pending signup (overwrite any existing pending signup for this email)
     pending_doc = {
         "email": req.email.lower(),
         "name": req.name,
@@ -102,10 +103,8 @@ async def signup_request(req: SignupRequest):
         upsert=True
     )
     
-    # 6. Send OTP Email
-    email_sent = send_otp_email(req.name, req.email.lower(), otp_code)
-    if not email_sent:
-        print(f"Warning: Failed to send OTP email to {req.email.lower()}")
+    # 6. Send OTP Email in background
+    background_tasks.add_task(background_send_otp, req.name, req.email.lower(), otp_code)
         
     return {
         "status": "success",
@@ -174,7 +173,7 @@ async def verify_otp(req: VerifyOtpRequest):
     }
 
 @router.post("/resend-otp")
-async def resend_otp(req: ResendOtpRequest):
+async def resend_otp(req: ResendOtpRequest, background_tasks: BackgroundTasks):
     # 1. Check if email is active
     existing = await users_col.find_one({"email": req.email.lower()})
     if existing:
@@ -202,8 +201,8 @@ async def resend_otp(req: ResendOtpRequest):
         }}
     )
     
-    # 4. Send email
-    send_otp_email(pending["name"], req.email.lower(), new_otp)
+    # 4. Send email in background
+    background_tasks.add_task(background_send_otp, pending["name"], req.email.lower(), new_otp)
     
     return {
         "status": "success",
@@ -257,7 +256,7 @@ async def login(req: LoginRequest):
     }
 
 @router.post("/forgot-password")
-async def forgot_password(req: ForgotPasswordRequest):
+async def forgot_password(req: ForgotPasswordRequest, background_tasks: BackgroundTasks):
     # 1. Check if email exists
     user = await users_col.find_one({"email": req.email.lower()})
     if not user:
@@ -285,8 +284,8 @@ async def forgot_password(req: ForgotPasswordRequest):
     # 4. Generate Link
     reset_link = f"http://localhost:5173/reset-password?token={reset_token}&email={req.email.lower()}"
     
-    # 5. Send Reset Email
-    send_reset_email(req.email.lower(), reset_link)
+    # 5. Send Reset Email in background
+    background_tasks.add_task(background_send_reset, req.email.lower(), reset_link)
     
     return {
         "status": "success",
