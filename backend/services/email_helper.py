@@ -63,8 +63,22 @@ def send_email(to_email: str, subject: str, text_body: str, html_body: str = Non
                 server.sendmail(settings.SMTP_SENDER, to_email, msg.as_string())
             print(f"Successfully sent real email to {to_email} via SMTP.")
             return True
+        except smtplib.SMTPAuthenticationError as e:
+            print(f"\n[SMTP ERROR] Authentication failed. Check your credentials and App Password. Error: {e}")
+            print("Fallback to terminal/log was successful.")
+            return False
+        except smtplib.SMTPConnectError as e:
+            print(f"\n[SMTP ERROR] Connection failed. Check SMTP_HOST and SMTP_PORT. Error: {e}")
+            print("Fallback to terminal/log was successful.")
+            return False
+        except smtplib.SMTPException as e:
+            print(f"\n[SMTP ERROR] SMTP Protocol error: {e}")
+            print("Fallback to terminal/log was successful.")
+            return False
         except Exception as e:
-            print(f"SMTP sending failed: {e}. Fallback to terminal/log was successful.")
+            import traceback
+            print(f"\n[SMTP ERROR] Unexpected error while sending email:\n{traceback.format_exc()}")
+            print("Fallback to terminal/log was successful.")
             return False
             
     return True
