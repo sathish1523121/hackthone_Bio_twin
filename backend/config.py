@@ -17,9 +17,13 @@ class Settings:
     SMTP_USER: str = os.getenv("SMTP_USER", "")
     SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
     SMTP_SENDER: str = os.getenv("SMTP_SENDER", "noreply@biotwin.ai")
+
+    # Resend API Key for Render
+    RESEND_API_KEY: str = os.getenv("RESEND_API_KEY", "")
+
+    # JWT Config
     EMAIL_MODE: str = os.getenv("EMAIL_MODE", "development")
     SUPABASE_URL: str = os.getenv("SUPABASE_URL") or os.getenv("VITE_SUPABASE_URL", "")
     SUPABASE_ANON_KEY: str = os.getenv("SUPABASE_ANON_KEY") or os.getenv("VITE_SUPABASE_ANON_KEY", "")
 
 settings = Settings()
-

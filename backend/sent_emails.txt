@@ -158,3 +158,72 @@ This link expires in 15 minutes.
 
 If this was not you, ignore this email.
 ========================================
+
+========================================
+EMAIL SENT TO: nxtwavelearning553@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=Xs-kcIAvNlOPugcPTTn9ch6lzRyM7BelSXr77h65BXE&email=nxtwavelearning553@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: meyira4600@bevriz.com
+SUBJECT: Verify Your BioTwin AI Account
+BODY:
+Hello shamarthi sathish,
+
+Welcome to BioTwin AI.
+
+Your verification code:
+331020
+
+This code expires in 5 minutes.
+
+If you did not request this, ignore this email.
+========================================
+
+========================================
+EMAIL SENT TO: test@example.com
+SUBJECT: Test Email from BioTwin AI
+BODY:
+This is a test email to verify SMTP configuration.
+========================================
+
+========================================
+EMAIL SENT TO: test@example.com
+SUBJECT: Test Email from BioTwin AI
+BODY:
+This is a test email to verify SMTP configuration.
+========================================
+
+========================================
+EMAIL SENT TO: test@example.com
+SUBJECT: Test Email from BioTwin AI
+BODY:
+This is a test email to verify SMTP configuration.
+========================================
+
+========================================
+EMAIL SENT TO: shamarthi.sathish111@gmail.com
+SUBJECT: Reset Your BioTwin AI Password
+BODY:
+Hello,
+
+We received a request to reset your BioTwin AI password.
+
+Click below to create a new password:
+http://localhost:5173/reset-password?token=ZHRjNzNyN65XKGqT-YHcXcsyn48ASWzniNMhVmVpoFE&email=shamarthi.sathish111@gmail.com
+
+This link expires in 15 minutes.
+
+If this was not you, ignore this email.
+========================================

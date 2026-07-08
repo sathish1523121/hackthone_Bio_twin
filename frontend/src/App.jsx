@@ -454,7 +454,14 @@ export default function App() {
         throw new Error(err.detail || 'Signup failed.');
       }
 
-      setStep('verify-email');
+      const data = await res.json();
+      const token = data.token;
+      const user = data.user;
+
+      localStorage.setItem('biotwin_jwt', token);
+      setUser(user);
+      setToken(token);
+      await loadUserSessionData(user.id, token);
     } catch (err) {
       setAuthError(err.message || 'Signup failed.');
     } finally {

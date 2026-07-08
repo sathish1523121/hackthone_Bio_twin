@@ -54,7 +54,7 @@ def background_send_reset(email: str, reset_link: str):
     send_reset_email(email, reset_link)
 
 @router.post("/signup")
-async def signup_request(req: SignupRequest, background_tasks: BackgroundTasks):
+async def signup_request(req: SignupRequest):
     if req.password != req.confirmPassword:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -80,35 +80,32 @@ async def signup_request(req: SignupRequest, background_tasks: BackgroundTasks):
             detail="An account with this email already exists. Please login."
         )
     
-    if req.email.lower() == "john.doe@example.com":
-        otp_code = "123456"
-    else:
-        otp_code = "".join(secrets.choice("0123456789") for _ in range(6))
-    
     hashed_pwd, salt = hash_password(req.password)
     
-    pending_doc = {
-        "email": req.email.lower(),
+    user_id = str(uuid.uuid4())
+    user_doc = {
+        "_id": user_id,
         "name": req.name,
+        "email": req.email.lower(),
         "phone": req.phone,
         "password": hashed_pwd,
         "salt": salt,
-        "otp_code": otp_code,
-        "created_at": datetime.now(timezone.utc)
+        "verified": True
     }
     
-    await pending_signups_col.replace_one(
-        {"email": req.email.lower()},
-        pending_doc,
-        upsert=True
-    )
+    await users_col.insert_one(user_doc)
     
-    # 6. Send OTP Email in background
-    background_tasks.add_task(background_send_otp, req.name, req.email.lower(), otp_code)
-        
+    token = encode_jwt({"sub": user_id, "email": req.email.lower(), "name": req.name})
+    
     return {
         "status": "success",
-        "message": "Verification OTP sent to your email address."
+        "message": "Account created successfully.",
+        "token": token,
+        "user": {
+            "id": user_id,
+            "name": req.name,
+            "email": req.email.lower()
+        }
     }
 
 @router.post("/verify-otp")
